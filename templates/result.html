@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Image Analysis Result</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Analysis Result</h1>
+        <div id="result">
+            <h2>Identified Objects and Entities</h2>
+            <ul>
+                {% for entity in analysis_result.entities %}
+                    <li>
+                        <strong>{{ entity.name }}</strong>: 
+                        <span>{{ entity.features }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="query-section">
+            <h2>Ask a Question About the Image</h2>
+            <input type="text" id="user-query" placeholder="Type your question here...">
+            <button onclick="submitQuery()">Submit</button>
+            <div id="query-response"></div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
