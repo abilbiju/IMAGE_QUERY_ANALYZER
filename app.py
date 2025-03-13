@@ -112,5 +112,17 @@ def debug_session():
     else:
         return jsonify({'session_contains_analysis': False})
 
+# Add this route to your app.py
+@app.route('/view_json')
+def view_json():
+    if 'analysis_result' in session:
+        try:
+            analysis_result = json.loads(session['analysis_result'])
+            return jsonify(analysis_result)
+        except Exception as e:
+            return jsonify({'error': f"Could not retrieve JSON: {str(e)}"})
+    else:
+        return jsonify({'error': 'No analysis result available'})
+
 if __name__ == '__main__':
     app.run(debug=True)
